@@ -1,190 +1,296 @@
-# **Test Scenario Document – Forever E-Commerce Website**
+# **1. TEST SCENARIO – Forever E-Commerce Website**
 
-**Project:** Forever E-Commerce Website
-**Document:** Test Scenarios
-**Version:** 1.0
-**Prepared By:** QA
-**Date:** 23-11-2025
+**Application / Test Level:** Web Application – Functional, UI, Integration
 
 ---
 
-# **1. User Registration – Test Scenarios**
+## **1.1 Test Basis**
 
-1. Check if the registration page opens properly with all required fields.
-2. Register using valid details and confirm that an account is created.
-3.Try registering with an already registered email/mobile number and check the correct error message.
-4. Verify validation messages for empty mandatory fields.
-5. Check invalid email formats (missing @, missing .com, special characters, long email).
-6. Verify password policy (minimum length, uppercase, lowercase, number, special character).
-7. Enter an invalid mobile number (less digits, more digits, symbols).
-8. Check password field masking and show/hide toggle.
-9. Verify OTP is received on email/mobile.
-10. Enter a wrong OTP and verify the error message.
-11.Enter expired OTP and verify the flow.
-12. Verify that OTP resend works.
-13. After successful registration, verify the user is moved to the login page.
+| Document                                            | Author | Date       | Version |
+| --------------------------------------------------- | ------ | ---------- | ------- |
+| Test Scenario Document – Forever E-Commerce Website | QA     | 23-11-2025 | 1.0     |
+
+**Basis:**
+
+* Business requirement documents (BRD)
+* Functional specification documents (FSD)
+* UI/UX design mockups
+* Requirement Traceability Matrix (RTM)
+* Previous release defects (if any)
 
 ---
 
-# **2. Login – Test Scenarios**
+## **1.2 The Requisites**
 
-1. Login with correct email/mobile and password.
-2. Try logging in with wrong credentials and check the error message.
-3. Check validation for empty login fields.
-4. Test login using OTP (if available).
-5. Test Forgot Password flow with a registered email/mobile.
-6. Test Forgot Password with an unregistered email/mobile.
-7. Verify account lock after multiple wrong attempts (if implemented).
-8. Login using the newly created account.
-9. After login, verify the user lands on the home page.
-10. Verify logout works properly.
+**To start the test execution the following matters need to be present:**
 
----
+* Test environment accessible
+* Test data for registration, login, product catalog, cart, payment
+* Dummy payment gateway credentials
+* Access to admin panel for backend checks (if applicable)
 
-# **3. Home Page – Test Scenarios**
+**Minimal system requirements:**
 
-1. Check if the home page loads completely without UI issues.
-2. Check if the banner slider works (auto and manual slide).
-3. Verify that category cards/icons open the correct pages.
-4. Check if the search bar is visible and working.
-5. Verify that featured or trending products load properly.
-6. Check if top navigation links (Men, Women, Electronics, etc.) work.
-7. Check that footer links open the correct pages.
+* Browser: Chrome, Firefox, Edge latest versions
+* Internet speed: 2 Mbps or above
+* Screen resolution: 1366x768 or higher
+* Operating system: Windows 10+, MacOS, Linux
+
+**System configuration:**
+
+* Web server running the staging environment
+* Database configured with test data
+* API endpoints accessible for product, cart, order, payment
+* Email and SMS OTP gateway configured
 
 ---
 
-# **4. Product Search – Test Scenarios**
+## **1.3 Product Risks (from MTP)**
 
-1. Search with a correct product name and verify relevant results.
-2. Search with partial keywords and check if suggestions appear.
-3. Search with a misspelled keyword and verify closest matching results.
-4. Search with random text and verify “No results found”.
-5. Verify recent searches appear for logged-in users (if implemented).
-6. Check if search suggestions match the typed text.
+1. Incorrect validation of mandatory fields during registration/login.
+2. Search and filter may not return accurate or complete results.
+3. Price calculation, discount, and coupon application errors in cart or checkout.
+4. Payment gateway failure or timeout scenarios not handled properly.
+5. Order status and tracking inconsistencies in My Orders section.
 
 ---
 
-# **5. Categories & Filters – Test Scenarios**
+## **2. Test Scenarios**
 
-1. Open any category and verify the products belong to that category.
-2. Apply price filters and verify results update correctly.
-3. Apply size/color filters (if available).
-4. Apply brand filter and verify accuracy.
-5. Use sorting options like Price Low→High, High→Low.
-6. Apply multiple filters together and check combined results.
-7. Remove one filter and verify results update.
+### **2.1 User Registration**
+
+**Test Basis:** BRD, FSD – Registration Module
+
+**Scenarios:**
+
+1. Check if the registration page opens with all required fields.
+2. Register with valid email, mobile, and password; verify account creation.
+3. Try registering with an already registered email/mobile; verify error message.
+4. Validate empty mandatory fields.
+5. Check invalid email formats.
+6. Verify password policy compliance.
+7. Enter invalid mobile numbers.
+8. Verify OTP delivery to email/mobile.
+9. Enter wrong OTP and verify error message.
+10. Enter expired OTP and verify behavior.
+11. Verify OTP resend functionality.
+12. After successful registration, verify redirection to login page.
+
+---
+
+### **2.2 Login**
+
+**Test Basis:** BRD, FSD – Login Module
+
+**Scenarios:**
+
+1. Login with valid credentials.
+2. Login with invalid credentials; verify error messages.
+3. Check empty field validation.
+4. Test login via OTP (if implemented).
+5. Test Forgot Password flow for registered users.
+6. Test Forgot Password for unregistered users.
+7. Verify account lock after multiple wrong attempts.
+8. Login using newly created account.
+9. Verify landing page post-login is Home Page.
+10. Verify logout functionality.
+
+---
+
+### **2.3 Home Page**
+
+**Test Basis:** BRD, FSD – Home Page
+
+**Scenarios:**
+
+1. Home page loads completely without UI issues.
+2. Banner slider works (auto/manual).
+3. Category cards/icons navigate correctly.
+4. Search bar visible and functional.
+5. Featured/trending products load properly.
+6. Top navigation links functional.
+7. Footer links functional.
+8. Personalized recommendations for logged-in users.
+9. Responsive layout on mobile, tablet, desktop.
+
+---
+
+### **2.4 Product Search**
+
+**Test Basis:** FSD – Search Module
+
+**Scenarios:**
+
+1. Search with exact product name; verify results.
+2. Search with partial keywords; check suggestions.
+3. Search with misspelled keywords; verify closest matches.
+4. Random text input shows “No results found”.
+5. Recent searches visible for logged-in users.
+6. Dropdown suggestions match typed text.
+7. Clicking a suggestion navigates to correct product/category page.
+
+---
+
+### **2.5 Categories & Filters**
+
+**Test Basis:** FSD – Category & Filter Module
+
+**Scenarios:**
+
+1. Open a category; verify correct products.
+2. Apply price filters; verify results.
+3. Apply size/color filters; verify results.
+4. Apply brand filter; verify accuracy.
+5. Use sorting options; verify order.
+6. Apply multiple filters; verify combined results.
+7. Remove one filter; verify updated results.
 8. Use “Clear All” to reset filters.
 
 ---
 
-# **6. Product Listing Page (PLP) – Test Scenarios**
+### **2.6 Product Listing Page (PLP)**
 
-1. Check if all products load with image, price, and name.
-2. Verify discount labels and tags are shown properly.
-3. Click the wishlist icon and verify the item is added.
-4. Verify pagination or infinite scroll works.
-5. Verify clicking a product opens the product detail page.
-6. Check if out-of-stock products show proper labels.
+**Test Basis:** FSD – PLP Module
 
----
+**Scenarios:**
 
-# **7. Product Detail Page (PDP) – Test Scenarios**
-
-1. Check if product details like name, price, description load correctly.
-2. Verify product images load and can be viewed/zoomed.
-3. Select different sizes or colors and verify selection works.
-4. Check Add to Cart button.
-5. Check Add to Wishlist button.
-6. Verify price and discount calculations.
-7. Check delivery availability using pincode.
-8. Verify user reviews and ratings are displayed.
-9. Check related products section.
+1. Products load with image, price, name.
+2. Discount labels visible.
+3. Wishlist icon adds item correctly.
+4. Pagination or infinite scroll works.
+5. Clicking a product opens PDP.
+6. Out-of-stock products labeled.
+7. Sponsored products displayed correctly.
 
 ---
 
-# **8. Add to Cart – Test Scenarios**
+### **2.7 Product Detail Page (PDP)**
 
-1. Add a product to the cart from the PDP.
-2. Add a product to the cart from the PLP.
-3. Increase and decrease the quantity and check price update.
-4. Remove the product from the cart.
-5. Check if cart total is calculated correctly.
-6. Verify cart data remains after logout and login.
-7. Apply coupon codes and check correct responses for valid/invalid codes.
-8. Check if delivery charges are added (if applicable).
+**Test Basis:** FSD – PDP Module
+
+**Scenarios:**
+
+1. Product details (name, price, description) displayed.
+2. Images load and zoom works.
+3. Size/color selection works.
+4. Add to Cart button functional.
+5. Add to Wishlist button functional.
+6. Price and discount calculation correct.
+7. Check delivery availability via pincode.
+8. Reviews and ratings displayed.
+9. Related products section works.
 
 ---
 
-# **9. Wishlist – Test Scenarios**
+### **2.8 Add to Cart**
+
+**Test Basis:** FSD – Cart Module
+
+**Scenarios:**
+
+1. Add product to cart from PDP.
+2. Add product to cart from PLP.
+3. Increase/decrease quantity; verify total price.
+4. Remove product from cart.
+5. Cart total calculation correct.
+6. Cart persists after logout/login.
+7. Apply coupon codes; verify valid/invalid responses.
+8. Delivery charges applied correctly.
+9. Cannot proceed with out-of-stock items.
+
+---
+
+### **2.9 Wishlist**
+
+**Test Basis:** FSD – Wishlist Module
+
+**Scenarios:**
 
 1. Add product to wishlist.
 2. Remove product from wishlist.
-3. Check if wishlist persists after logout/login.
-4. Move product from wishlist to cart.
-5. Check if price and stock changes reflect on wishlist items.
+3. Wishlist persists after logout/login.
+4. Move product to cart.
+5. Price/stock changes reflect in wishlist.
 
 ---
 
-# **10. Checkout – Test Scenarios**
+### **2.10 Checkout**
 
-1. Go to checkout from the cart.
-2. Check if order summary displays correct product details.
-3. Choose an existing address and continue.
-4. Add a new address from checkout.
-5. Check delivery charges or free delivery message.
-6. Apply discount code (if supported).
-7. Verify user cannot proceed without selecting an address.
+**Test Basis:** FSD – Checkout Module
 
----
+**Scenarios:**
 
-# **11. Address Management – Test Scenarios**
-
-1. Add a new address with valid inputs.
-2. Verify validation for pincode, phone number, and required fields.
-3. Edit an existing address.
-4. Delete an address.
-5. Mark an address as default.
+1. Checkout from cart.
+2. Verify order summary details.
+3. Select existing address; continue.
+4. Add new address from checkout.
+5. Delivery charges/free delivery message correct.
+6. Apply discount codes.
+7. Cannot proceed without selecting address.
 
 ---
 
-# **12. Payment – Test Scenarios (Dummy Data)**
+### **2.11 Address Management**
 
-1. Check if payment options load (Card, UPI, Wallets, COD).
-2. Make payment with a valid dummy card.
-3. Try invalid card details and check error messages.
-4. Try expired card details.
-5. Test incorrect UPI ID.
-6. Cancel the payment and verify the user returns to checkout.
-7. Check payment timeout handling.
-8. Verify order confirmation only appears after successful payment.
-9. Verify COD option is available only for eligible addresses/products.
+**Test Basis:** FSD – Address Module
 
----
+**Scenarios:**
 
-# **13. Order Summary – Test Scenarios**
-
-1. Check order details like product name, price, address, and payment type.
-2. Verify order ID is generated.
-3. Check invoice download or print option.
-4. Check links like “Continue Shopping” or “Go to My Orders”.
+1. Add new address with valid data.
+2. Validate pincode, phone, required fields.
+3. Edit existing address.
+4. Delete address.
+5. Mark address as default.
 
 ---
 
-# **14. Order Tracking – Test Scenarios**
+### **2.12 Payment (Dummy Data)**
 
-1. Check if the order appears in My Orders after successful payment.
-2. Verify order statuses update correctly:
+**Test Basis:** FSD – Payment Module
 
-   * Placed
-   * Packed
-   * Shipped
-   * Out for Delivery
-   * Delivered
-3. Check if tracking link opens the correct tracking page.
-4. Try cancelling the order before it is shipped.
-5. Verify refund starts for cancelled prepaid orders.
-7. Verify reorder option for past orders.
+**Scenarios:**
 
-
+1. Payment options load (Card, UPI, Wallets, COD).
+2. Payment with valid dummy card succeeds.
+3. Invalid card details show errors.
+4. Expired card test.
+5. Incorrect UPI ID test.
+6. Cancel payment returns user to checkout.
+7. Payment timeout handling.
+8. Order confirmation only after successful payment.
+9. COD only for eligible addresses/products.
 
 ---
+
+### **2.13 Order Summary**
+
+**Test Basis:** FSD – Order Module
+
+**Scenarios:**
+
+1. Verify order details (product, price, address, payment).
+2. Order ID generated correctly.
+3. Invoice download/print works.
+4. Links “Continue Shopping” / “Go to My Orders” functional.
+
+---
+
+### **2.14 Order Tracking**
+
+**Test Basis:** FSD – Order Tracking Module
+
+**Scenarios:**
+
+1. Order appears in My Orders after payment.
+2. Order statuses update correctly:
+Verify order statuses update correctly:
+     •  Placed
+     •  Packed
+     •  Shipped
+     •  Out for Delivery
+     •  Delivered
+3. Tracking link opens courier page.
+4. Cancel order before shipment.
+5. Refund starts for prepaid cancellations.
+6. Reorder option for past orders.
+
